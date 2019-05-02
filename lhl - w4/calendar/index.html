@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>calendar</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://momentjs.com/downloads/moment.js"></script>
+</head>
+<style type="text/css">
+  body {
+    margin: 0;
+    background: rgba(0,0,0, .09);
+  }
+  .shadow {
+    -webkit-box-shadow: 0 8px 6px -6px black;
+       -moz-box-shadow: 0 8px 6px -6px black;
+            box-shadow: 0 8px 6px -6px black;
+  }
+  .calendar {
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+    width: 700px;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+  .week {
+    height: 100px;
+  }
+  .day {
+    background: #fff;
+    box-sizing: border-box;
+    height: 100px;
+    width: 100px;
+  }
+  .day p {
+    margin: 0;
+    padding: 5px;
+  }
+  .selected {
+    background: #e7f3f2;
+  }
+  .past-day {
+    background: #efefef;
+  }
+</style>
+
+<body>
+  <div class="shadow calendar">
+
+  </div>
+</body>
+
+<script type="text/javascript">
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
+  const now = Date.now() / 1000;
+  let date = moment.unix(now)
+  currentDayOfWeek = date.day();
+  let referenceDate = now - (currentDayOfWeek * 86400);
+
+  const border = '1px solid black';
+  for(let w=1; w<5; w++) {
+    for(let d=1; d<8; d++) {
+      let referenceMoment = moment.unix(referenceDate)
+      let DD = referenceMoment.format("DD/MM/YYYY").slice('0', '2')
+      referenceDate = referenceDate + 86400;
+
+      const $day = $(`<div id="${w}${d}"" class="day"><p>${DD} - ${weekdays[d-1]}</p></div>`)
+      $day.css({'border-top': border, 'border-left': border})
+
+      if (referenceDate <= now) {
+        $day.addClass('past-day');
+      }
+
+      const dayId = $day.attr('id');
+      if (dayId[1] == 7) {
+        $day.css({'border-right': border})
+      }
+      if (dayId[0] == 4) {
+        $day.css({'border-bottom': border})
+      }
+      $('.calendar').append($day)
+    }
+  }
+
+  $('.day').on('click', function(event){
+    let $dayClicked = $(this)
+
+    $dayId = $dayClicked.attr('id')
+    if($dayId[0] == 1 && $dayId[1] < currentDayOfWeek + 1) {
+      return;
+    }
+
+    if($dayClicked.hasClass('selected')) {
+      $dayClicked.removeAttr('data-selected')
+    } else{
+      $dayClicked.attr('data-selected','selected')
+    }
+
+    $dayClicked.toggleClass('selected');
+  })
+
+</script>
+</html>

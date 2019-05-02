@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home Page</title>
+
+    <!-- <link rel="stylesheet" href="../public/vendor/normalize-4.1.1.css" type="text/css" /> -->
+    <!-- <link rel="stylesheet" href="../public/vendor/border-box.css" type="text/css" /> -->
+    <!-- <link rel="stylesheet" href="../public/styles/layout.css" type="text/css" /> -->
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!--<script type="text/javascript" src="/scripts/app.js"></script>-->
+
+  <!--Calendar links-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.min.css"/>
+    <script src="http://momentjs.com/downloads/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.min.js"></script>
+
+    <style type="text/css">
+      #calendar {
+        width: 900px;
+        margin: 0 auto 40px;
+      }
+      button {
+        padding: 5px;
+      }
+      .centered {
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+      }
+      .selected {
+        background: #cdc;
+      }
+      #event-build-form > * {
+        text-align: left;
+        padding: 10px 0;
+      }
+      #event-build-form {
+        width: 900px;
+        margin: 0 auto;
+      }
+      #createEventButton {
+        border: 1px solid black;
+        display: inline-block;
+        padding: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+    <script>
+      $(document).ready(function() {
+        //Toggle lock interactions test:
+        const $lockButton = $('.togglelock')
+        const $submit = $('#createEventButton')
+        const $form = $('#event-build-form form')
+        let datesArray = [];
+
+        function postEvent() {
+          const queryStr = createQueryString()
+          console.log(queryStr)
+          $.ajax({
+            url: '/events',
+            method: 'POST',
+            data: queryStr
+          }).done(function(arg){
+            console.log(arg)
+          })
+        }
+
+        function createQueryString() {
+          const $email = $('#email-input')
+          if (!$email.val()) {
+            $email.val('null')
+          }
+          let data = $form.serialize();
+          for (var i = 1; i < datesArray.length + 1; i++) {
+            data = data + `&date${i}=${datesArray[i-1]}`
+          }
+          return data;
+        }
+
+        $submit.on('click', postEvent)
+
+        $lockButton.on('click', function() {
+          $(this).toggleClass('locked');
+        });
+
+        $('#calendar').fullCalendar({
+            //test functions:
+            dayClick: function(date, jsEvent, view) {
+            // toggle day color with clicks (by adding a new class to the clicked element)
+            if (!$lockButton.hasClass('locked')) {
+              const dateClicked = this[0].dataset.date;
+              if ($(this).hasClass('selected')) {
+                datesArray = datesArray.filter( a => a !== dateClicked )
+              } else {
+                datesArray.push(dateClicked)
+              };
+              $(this).toggleClass('selected');
+            }
+          }
+        })
+
+      })
+
+    </script>
+  </head>
+
+  <body>
+    <section id="event-build-form" class="centered">
+      <form action="/events" action="POST">
+        <div>
+          <label><b>Event Name</b></label>
+          <input type="text" placeholder="My 98th birthday party!" name="eventName">
+        </div>
+        <div>
+          <label><b>Creator Name</b></label>
+          <input type="text" placeholder="Old Bird" name="creator">
+        </div>
+        <div>
+          <label><b>Email</b></label>
+          <input id="email-input" type="email" placeholder="Email - (not required)" name="email">
+        </div>
+        <div id="createEventButton" >Create Event</div>
+      </form>
+    </section>
+    <h2 class="centered">Calendar!</h2>
+    <button type='button' class='togglelock centered'>Toggle Lock</button>
+    <div id='calendar'></div>
+  </body>
+</html>
+

@@ -1,0 +1,17 @@
+// Vendor
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+// App
+@import "products";
+
+// Global
+body {
+  padding-top: 70px;
+}
+
+// I know this isn't acceptable.. my bad..
+body > .container:last-of-type:after {
+  height: 50px;
+}

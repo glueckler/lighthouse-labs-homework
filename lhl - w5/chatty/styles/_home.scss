@@ -1,0 +1,195 @@
+// $main-color: #0689f6;
+$main-color: #222;
+$footer-c: #444;
+
+@mixin gen-color($class, $color) {
+  #{$class} {
+    color: $color;
+    border-right: 2px solid $color;
+  }
+}
+
+@mixin max-width {
+  max-width: 1200px;
+}
+
+@include gen-color('.color1', green);
+@include gen-color('.color2', maroon);
+@include gen-color('.color3', dodgerblue);
+@include gen-color('.color4', tomato);
+
+a {
+  color: #eee;
+}
+
+h1 {
+  color: $main-color;
+}
+
+body {
+  background: white;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  margin: 70px 0;
+}
+
+.chatbar {
+  background: $footer-c;
+  border-top: 1px solid black;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  position: fixed;
+  right: 0;
+}
+
+.chatbar-wrapper {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  @include max-width;
+}
+
+.chatbar-message,
+.chatbar-username {
+  border: none;
+  border-radius: 2px;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  padding: 0 9px;
+
+}
+
+.disabled-state {
+  // opacity: .9;
+}
+
+.chatbar-message {
+  font-size: 0.8rem;
+  -webkit-box-flex: 8;
+      -ms-flex: 8;
+          flex: 8;
+  &:focus {
+    outline-color: #ccc;
+  }
+}
+
+.chatbar-username {
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  caret-color: #aaa;
+  background: $footer-c;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  &::-webkit-input-placeholder {
+    text-align: center;
+    color: white;
+  }
+  &:focus {
+    outline-color: #ccc;
+  }
+}
+
+.message {
+  margin: 0 auto;
+  @include max-width;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px;
+}
+
+.message-img {
+  margin: 20px auto;
+
+  img {
+    max-width: 60%;
+    border: 2px solid #ddd;
+  }
+}
+
+.message.system {
+  font-style: italic;
+  padding: 5px 20px;
+}
+
+.message-content,
+.message-username {
+  overflow: hidden;
+  margin: 5px;
+  padding: 0 10px;
+}
+
+.message-content {
+  -webkit-box-flex: 8;
+      -ms-flex: 8;
+          flex: 8;
+}
+
+.message-username {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  font-weight: 700;
+}
+
+.navbar {
+  color: #eee;
+  font-family: 'Rozha One', serif;
+  background: $main-color;
+  border-bottom: 1px solid black;
+  height: 60px;
+  left: 0;
+  padding: 0 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  #user-count {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 30px;
+  }
+}
+
+.nav-wrapper{
+  position: relative;
+  margin: 0 auto;
+  @include max-width;
+}
+
+.navbar-brand {
+  display: block;
+  font-weight: 700;
+  font-size: 28px;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+body {
+  background: $body-test;
+  padding: 10em 0 0;
+  width: 100%;
+  text-align: center;
+  &:hover {
+    opacity: .1;
+  }
+}

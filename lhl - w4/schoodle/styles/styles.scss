@@ -1,0 +1,102 @@
+@import './parts/_variables';
+@import './parts/_forms';
+@import './parts/_calendar';
+
+
+/* ------------------------------------- */
+
+/* LAYOUT LAYOUT LAYOUT LAYOUT */
+
+body {
+  background: $c1;
+  font-size: 18px;
+  font-family: 'Slabo 27px', serif;
+}
+
+.container-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.med-margin-top {
+  margin-top: 50px;
+}
+
+[hidden][hidden] {
+  display: none;
+}
+
+/*HEADER HEADER HEADER HEADER*/
+
+header {
+  color: $c3;
+  padding-top: 1em;
+  text-align: center;
+  font-size: 2.4em;
+  font-weight: 600;
+}
+
+/* CREATE BUTTON CREATE BUTTON CREATE BUTTON */
+
+.button {
+  text-align: center;
+  padding: 20px;
+
+  div {
+    font-size: 1.2em;
+    border: 2px solid $c3;
+    border-radius: 4px;
+    width: 220px;
+    display: inline-block;
+    padding: .4em 0;
+    cursor: pointer;
+    opacity: .7;
+    transition: all .1s ease-out;
+
+    &:hover {
+      opacity: 1;
+      background: #eee;
+    }
+  }
+
+  #create-event-button {
+    width: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+}
+
+.voting-page {
+  padding: .1em 0 .4em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

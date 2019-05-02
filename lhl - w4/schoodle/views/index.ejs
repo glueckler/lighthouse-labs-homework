@@ -1,0 +1,30 @@
+<% include ./parts/_head %>
+<% include ./parts/_header %>
+<div class="container-flex-wrap med-margin-top">
+  <div id='calendar'></div>
+
+  <section id="event-build-form">
+    <form action="/events" action="POST">
+      <div class="form-input focused" id="event-name">
+        <p>Event Name</p><p>:</p>
+        <input id = 'eventName' type="text" placeholder="90th birthday party!" name="eventName">
+      </div>
+      <div class="form-input">
+        <p>Your Name</p><p>:</p>
+        <input type="text" placeholder="Old Tate" name="creator">
+      </div>
+      <div class="form-input">
+        <p>Your Email</p><p>:</p>
+        <input id="email-input" type="email" placeholder="Email (not required)" name="email">
+      </div>
+    </form>
+  </section>
+
+  <!-- <button type='button' class='togglelock'>Toggle Lock</button> -->
+</div>
+  <div class="button small-font">
+    <div id="create-event-button">Create Event</div>
+  </div>
+
+
+<% include ./parts/_footer %>

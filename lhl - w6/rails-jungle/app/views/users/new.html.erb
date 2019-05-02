@@ -1,0 +1,33 @@
+<div class="col-sm-4"></div>
+<div class="col-sm-4 sign-in-form">
+  <h1 class="sign-in-form__title">Signup!</h1>
+
+  <%= form_for @user, url: '/users' do |f| %>
+    <% if f.object.errors.any? %>
+      <div class="alert alert-danger">
+        <strong>The following errors prevented saving:</strong>
+        <ul>
+          <% f.object.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      Name: <%= f.text_field :name %>
+    </div>
+    <div class="row">
+      Email: <%= f.text_field :email %>
+    </div>
+    <div class="row">
+      Password: <%= f.password_field :password %>
+    </div>
+    <div class="row">
+      Password Confirmation: <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="row">
+      <%= f.submit "Submit" %>
+    </div>
+
+  <% end %>
+</div>
